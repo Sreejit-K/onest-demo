@@ -59,15 +59,21 @@ async function getLivePledgedAmountByCauseID (causeId) {
         "offset": 0,
         "filters": {
             //make this as causeId
-            "donorId" : {
+            "causeId" : {
                 "eq": causeId
             }
         }
     }
+    let sum = 0;
     let fetchPledgesByCauseId  = await pledgeService.searchPledge(req);
-    let sum = fetchPledgesByCauseId.reduce( function (a, b) {
-        return  parseInt(a.amountForPledge ? a.amountForPledge : 0) + parseInt(b.amountForPledge ? b.amountForPledge : 0);
-    });
+    if (fetchPledgesByCauseId.length === 1){
+        sum = parseInt(fetchPledgesByCauseId[0]?.amountForPledge);
+    } else {
+        let sum = fetchPledgesByCauseId.reduce( function (a, b) {
+            return  parseInt(a.amountForPledge ? a.amountForPledge : 0) + parseInt(b.amountForPledge ? b.amountForPledge : 0);
+        });
+    }
+
     return {
         "totalAmountPledged": sum
     }
