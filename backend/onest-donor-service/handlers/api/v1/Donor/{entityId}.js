@@ -1,5 +1,6 @@
 'use strict';
 var dataProvider = require('../../../../data/api/v1/Donor/{entityId}.js');
+var donorService = require('../../../../services/Donorservice.js');
 /**
  * Operations on /api/v1/Donor/{entityId}
  */
@@ -11,20 +12,20 @@ module.exports = {
      * produces: 
      * responses: 200
      */
-    get: function (req, res, next) {
+    get: async function (req, res, next) {
         /**
          * Get the data for response 200
          * For response `default` status 200 is used.
          */
         var status = 200;
-        var provider = dataProvider['get']['200'];
-        provider(req, res, function (err, data) {
-            if (err) {
-                next(err);
-                return;
-            }
-            res.status(status).send(data && data.responses);
-        });
+        try {
+            var reqParams = req.params;
+            var {entityId} = reqParams ;
+            var getCause = await donorService.getDonorById(entityId, req.headers)
+            res.status(status).send(getCause);
+        } catch (error) {
+            next(error);
+        }
     },
     /**
      * summary: 
@@ -33,19 +34,20 @@ module.exports = {
      * produces: 
      * responses: 200
      */
-    put: function (req, res, next) {
+    put: async function (req, res, next) {
         /**
          * Get the data for response 200
          * For response `default` status 200 is used.
          */
         var status = 200;
-        var provider = dataProvider['put']['200'];
-        provider(req, res, function (err, data) {
-            if (err) {
-                next(err);
-                return;
-            }
-            res.status(status).send(data && data.responses);
-        });
+        var reqParams = req.params;
+        var {entityId} = reqParams ;
+        var cause = req.body;
+        try {
+            var getCause = await donorService.updateDonorById(entityId, cause)
+            res.status(status).send(getCause);
+        } catch (error) {
+            next(error);
+        }
     }
 };

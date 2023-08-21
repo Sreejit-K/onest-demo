@@ -1,5 +1,5 @@
 'use strict';
-var dataProvider = require('../../../../data/api/v1/Pledge/{entityId}.js');
+var pledgeService = require('../../../../services/PledgeService');
 /**
  * Operations on /api/v1/Pledge/{entityId}
  */
@@ -11,20 +11,20 @@ module.exports = {
      * produces: 
      * responses: 200
      */
-    get: function (req, res, next) {
+    get: async function (req, res, next) {
         /**
          * Get the data for response 200
          * For response `default` status 200 is used.
          */
         var status = 200;
-        var provider = dataProvider['get']['200'];
-        provider(req, res, function (err, data) {
-            if (err) {
-                next(err);
-                return;
-            }
-            res.status(status).send(data && data.responses);
-        });
+        try {
+            var reqParams = req.params;
+            var {entityId} = reqParams ;
+            var getPledge = await pledgeService.getPledgeById(entityId, req.headers)
+            res.status(status).send(getPledge);
+        } catch (error) {
+            next(error);
+        }
     },
     /**
      * summary: 
@@ -33,19 +33,20 @@ module.exports = {
      * produces: 
      * responses: 200
      */
-    put: function (req, res, next) {
+    put: async function (req, res, next) {
         /**
          * Get the data for response 200
          * For response `default` status 200 is used.
          */
         var status = 200;
-        var provider = dataProvider['put']['200'];
-        provider(req, res, function (err, data) {
-            if (err) {
-                next(err);
-                return;
-            }
-            res.status(status).send(data && data.responses);
-        });
+        var reqParams = req.params;
+        var {entityId} = reqParams ;
+        var pledge = req.body.PledgeDetails;
+        try {
+            var getPledge = await pledgeService.updatePledgeById(entityId, pledge)
+            res.status(status).send(getPledge);
+        } catch (error) {
+            next(error);
+        }
     }
 };

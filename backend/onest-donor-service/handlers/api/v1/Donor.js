@@ -1,5 +1,5 @@
 'use strict';
-var dataProvider = require('../../../data/api/v1/Donor.js');
+var donorService = require('../../../services/Donorservice');
 /**
  * Operations on /api/v1/Donor
  */
@@ -11,19 +11,23 @@ module.exports = {
      * produces: 
      * responses: 200
      */
-    post: function (req, res, next) {
+    post: async function (req, res, next) {
         /**
          * Get the data for response 200
          * For response `default` status 200 is used.
          */
         var status = 200;
-        var provider = dataProvider['post']['200'];
-        provider(req, res, function (err, data) {
-            if (err) {
-                next(err);
-                return;
-            }
-            res.status(status).send(data && data.responses);
-        });
+        try {
+            let donorToBeCreated = req.body;
+            let createdDonor = await donorService.createDonor(donorToBeCreated);
+            console.log(createdDonor);
+            res.status(status).send({
+                "message": "string",
+                "success": "string",
+                "donorUpdate":  createdDonor 
+            })
+        } catch (error) {
+            next(error);
+        }
     }
 };

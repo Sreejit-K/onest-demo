@@ -31,6 +31,10 @@
                 "type": "string",
                 "title": "donor Id"
             },
+            "causeId": {
+              "type": "string",
+              "title": "osId of the cause"
+            },
             "email": {
                 "type": "string",
                 "title": "email"

@@ -2,6 +2,8 @@ const { REGISTRY_URL} = require("../config/config");
 const { default: axios } = require("axios");
 const config = require('../config/config');
 const utils = require('../services/utils');
+const pledgeService = require('./PledgeService');
+const { integer } = require("swagmock/lib/generators");
 
 
 const serviceUrl = `${REGISTRY_URL}/api/v1/Cause`;
@@ -52,9 +54,22 @@ async function updateCauseById(causeId,cause){
 }
 
 async function getLivePledgedAmountByCauseID (causeId) {
-    let data = await getCauseById(causeId);
+    // let data = await getCauseById(causeId);
+    let req = {
+        "offset": 0,
+        "filters": {
+            //make this as causeId
+            "donorId" : {
+                "eq": causeId
+            }
+        }
+    }
+    let fetchPledgesByCauseId  = await pledgeService.searchPledge(req);
+    let sum = fetchPledgesByCauseId.reduce( function (a, b) {
+        return  parseInt(a.amountForPledge ? a.amountForPledge : 0) + parseInt(b.amountForPledge ? b.amountForPledge : 0);
+    });
     return {
-        "totalAmountPledged": data.amountPledged
+        "totalAmountPledged": sum
     }
 }
 

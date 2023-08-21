@@ -429,7 +429,7 @@
             "type": "object",
             "title": "The Cause Schema",
             "required": [
-                "name,",
+                "name",
                 "organisation"
             ],
             "properties": {
@@ -518,20 +518,24 @@
         "Pledge": {
             "type": "object",
             "title": "The Pedge Schema",
-            "required": [
-                "donorName",
-                "emergencyDetails",
-                "pledgeDetails",
-                "identificationDetails"
-            ],
             "properties": {
                 "PledgeDetails": {
                     "type": "object",
+                    "required": [
+                        "donorName",
+                        "email",
+                        "causeId",
+                        "donorId",
+                        "amountForPledge"
+                    ],
                     "properties": {
                         "donorName": {
                             "type": "string"
                         },
                         "donorId": {
+                            "type": "string"
+                        },
+                        "causeId": {
                             "type": "string"
                         },
                         "email": {

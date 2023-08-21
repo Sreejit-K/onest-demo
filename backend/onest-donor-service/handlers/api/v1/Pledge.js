@@ -1,5 +1,5 @@
 'use strict';
-var dataProvider = require('../../../data/api/v1/Pledge.js');
+var pledgeService = require('../../../services/PledgeService');
 /**
  * Operations on /api/v1/Pledge
  */
@@ -11,19 +11,26 @@ module.exports = {
      * produces: 
      * responses: 200
      */
-    post: function (req, res, next) {
+    post: async function (req, res, next) {
         /**
          * Get the data for response 200
          * For response `default` status 200 is used.
          */
         var status = 200;
-        var provider = dataProvider['post']['200'];
-        provider(req, res, function (err, data) {
-            if (err) {
-                next(err);
-                return;
-            }
-            res.status(status).send(data && data.responses);
-        });
+        try {
+            let pledgeToBeCreated = req.body;
+            if (!req.body?.PledgeDetails?.causeId) throw new Error("please provide a causeId");
+            if (!req.body?.PledgeDetails?.donorId) throw new Error("please provide a donorId");
+            if (!req.body?.PledgeDetails?.amountForPledge) throw new Error("please provide a amount to be pledged");
+            let createdPledge = await pledgeService.createPledge(pledgeToBeCreated.PledgeDetails);
+            console.log(createdPledge);
+            res.status(status).send({
+                "message": "string",
+                "success": "string",
+                "pledgeUpdate":  createdPledge 
+            })
+        } catch (error) {
+            next(error);
+        }
     }
 };
