@@ -25,8 +25,8 @@
           "donorOrganisation": "schema:Text"
         }
       },
-      "Pledge": {
-        "@id": "pledge:OrganPledge",
+      "OnestPledge": {
+        "@id": "pledge:OnestPledge",
         "@context": {
           "causeType":  "schema:Text",
           "causeId":"schema:Text",

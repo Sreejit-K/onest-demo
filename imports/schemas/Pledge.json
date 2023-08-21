@@ -73,13 +73,13 @@
     },
     "_osConfig": {
       "enableSearch": "true",
-      "indexFields": [        
+      "indexFields": [],
+      "uniqueIndexFields": [        
         "$.donorId",
         "$.donorName",
         "$.causeDetails.causeId",
         "$.email"
-        ],
-      "uniqueIndexFields": [],
+      ],
       "systemFields": [
         "osCreatedAt",
         "osUpdatedAt",
@@ -97,7 +97,7 @@
         ],
         "id": "https://dev-donor-registry.abdm.gov.in/pledgecredentials/{{osid}}",
         "issuer": "https://dev-donor-registry.abdm.gov.in",
-        "issuanceDate": "{{formatTime osUpdatedAt}}",
+        "issuanceDate": "{{osCreatedAt}}",
         "credentialSubject": {
           "type": "Person",
           "id": "did:onestPledge:{{osid}}",
@@ -105,24 +105,13 @@
           "donorName": "{{donorName}}",
           "donorOrganisation":"{{donorOrganisation}}",
           "pledge": {
-            "type": "OrganPledge",
+            "type": "OnestPledge",
             "causeType":  "{{causeType}}",
             "causeId":"{{causeId}}",
             "causeName": "{{causeName}}",
             "organisation": "{{organisation}}",
             "amountPledged": "{{amountForPledge}}"
-          },
-          "evidence": [
-            {
-              "type": [
-                "eKYC"
-              ],
-              "verifier": "https://healthidsbx.abdm.gov.in/",
-              "evidenceDocument": "ABHA",
-              "subjectPresence": "online",
-              "refId": "{{osid}}"
-            }
-          ]
+          }
         },
         "nonTransferable": "true"
       },
