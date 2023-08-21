@@ -89,7 +89,7 @@
       "credentialTemplate": {
         "@context": [
           "https://www.w3.org/2018/credentials/v1",
-          "https://raw.githubusercontent.com/Sunbird-RC/demo-donor-registry/main/contexts/vc-context.json"
+          "https://raw.githubusercontent.com/Sreejit-K/onest-demo/master/context/vc-context.json"
         ],
         "type": [
           "VerifiableCredential",

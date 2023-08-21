@@ -5,8 +5,7 @@
       "id": "@id",
       "type": "@type",
       "schema": "https://schema.org/",
-      "pledge": "https://raw.githubusercontent.com/Sunbird-RC/demo-donor-registry/main/contexts/vc-context.json",
-      "emergency": "https://raw.githubusercontent.com/Sunbird-RC/demo-donor-registry/main/contexts/vc-context.json",
+      "pledge": "https://raw.githubusercontent.com/Sreejit-K/onest-demo/master/context/vc-context.json",
       "ProofOfOrganPledge": {
         "@id": "schema:ProofOfOrganPledge",
         "@context": {
