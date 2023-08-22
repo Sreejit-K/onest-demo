@@ -25,8 +25,8 @@ module.exports = {
             let createdPledge = await pledgeService.createPledge(pledgeToBeCreated.PledgeDetails);
             console.log(createdPledge);
             res.status(status).send({
-                "message": "string",
-                "success": "string",
+                "message": "Pledge Created Succesfully",
+                "success": true,
                 "pledgeUpdate":  createdPledge 
             })
         } catch (error) {

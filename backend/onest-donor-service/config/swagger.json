@@ -550,6 +550,9 @@
                         "amountForPledge": {
                             "type": "string"
                         },
+                        "pledgeDate":{
+                            "type": "string"
+                        },
                         "causeDetails": {
                             "type": "object",
                             "properties": {
