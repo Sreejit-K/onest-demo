@@ -59,7 +59,7 @@ function CauseDetails() {
         <Box
             sx={{
             display: 'flex',
-            alignItems: 'felx-start',
+            alignItems: {xs :'felx-start' , md: 'center'},
             flexDirection: 'column',
             justifyContent: 'center',
             p: 1,
@@ -67,6 +67,8 @@ function CauseDetails() {
             bgcolor: 'background.paper',
             borderRadius: 1,
             }}
+
+
         >
             <h6 style={{color:'#0F75BC'}}>{cause?.name}</h6>
         </Box>

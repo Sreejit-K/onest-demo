@@ -10,7 +10,6 @@ import Causes from "./utils/Constants";
 import { useEffect, useState } from "react";
 import Pledge from "./routes/Pledge";
 import CauseDetails from "./routes/CauseDetails";
-import Secured from "./routes/Secured";
 import { StyledEngineProvider } from '@mui/material/styles';
 import ScrollableTabsButtonPrevent from "./routes/pillBasedList";
 import ConfirmationPage from "./routes/ConfirmationPage";
@@ -32,7 +31,7 @@ function App() {
                   <Route path="home" element={<ScrollableTabsButtonPrevent />} />
                   <Route path="pledge" element={<Pledge />} />
                   <Route path="confirmationPage" element={<ConfirmationPage />} />
-                  <Route path="/" element={<Home  causes={cause}/>}>
+                  <Route path="/" element={<ScrollableTabsButtonPrevent />}>
                   
                   {/* <Route path="home" element={<Home causes={cause} />} /> */}
               </Route>
